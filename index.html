@@ -1,1 +1,180 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>روستري | محمصة القهوة المختصة</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- شريط الإعلانات المتحرك العلوي -->
+  <div class="announcement-bar">
+    ✨ شحن سريع لجميع المدن | حبوب قهوة محمصة حديثاً ☕
+  </div>
+
+  <!-- الهيدر الرئيسي -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">🌿 ROASTERY</div>
+      <h1>نختار أجود حبوب القهوة لنصنع لك كوبك المثالي</h1>
+      <p>محامص محلية، معالجة دقيقة، وإيحاءات لا تنسى.</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- أداة مستكشف القهوة الذكي (تفاعل فوري) -->
+    <section class="interactive-section">
+      <h2>🎯 مستكشف القهوة الذكي</h2>
+      <p class="section-subtitle">لا تعرف أي محصول تختار؟ أجب عن السؤال التالي لنقترح عليك الأنسب:</p>
+      
+      <div class="quiz-box">
+        <label>ما هي طريقتك المفضلة لتحضير القهوة؟</label>
+        <div class="quiz-options">
+          <button type="button" class="quiz-btn" onclick="recommendCoffee('filter')">فلتر / V60 ☕</button>
+          <button type="button" class="quiz-btn" onclick="recommendCoffee('espresso')">إسبريسو / حليب 🥛</button>
+          <button type="button" class="quiz-btn" onclick="recommendCoffee('balanced')">متوازن للجميع ✨</button>
+        </div>
+        <div id="quizResult" class="quiz-result"></div>
+      </div>
+    </section>
+
+    <!-- قسم عرض المنتجات -->
+    <section class="products-section">
+      <h2>📦 محاصيلنا المتوفرة (حبوب كاملة)</h2>
+      <div class="products-grid">
+        
+        <div class="product-card">
+          <div class="badge">الأكثر طلباً</div>
+          <div class="product-img">🫘</div>
+          <h3>محصول إثيوبيا - يرجاشيف</h3>
+          <p class="description">حبوب كاملة بمعالجة مغسولة. إيحاءات فواكه والأزهار.</p>
+          <span class="weight">250 جرام</span>
+          <span class="price">55 ر.س</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img">🫘</div>
+          <h3>محصول كولومبيا - سان أغوستين</h3>
+          <p class="description">حبوب كاملة بمعالجة مجففة. إيحاءات الشوكولاتة والمكسرات.</p>
+          <span class="weight">250 جرام</span>
+          <span class="price">60 ر.س</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img">🫘</div>
+          <h3>محصول البرازيل - سيرادو</h3>
+          <p class="description">حبوب كاملة بقوام غني وإيحاءات الكاكاو والبندق.</p>
+          <span class="weight">250 جرام</span>
+          <span class="price">50 ر.س</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img">🫘</div>
+          <h3>خلطة الإسبريسو الخاصة</h3>
+          <p class="description">مزيج متوازن خصيصاً لمشروبات الإسبريسو والحليب.</p>
+          <span class="weight">250 جرام</span>
+          <span class="price">65 ر.س</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- نموذج الطلب والخدمات المتقدمة -->
+    <section class="order-section">
+      <h2>🛍️ إتمام الطلب السريع</h2>
+      <form id="orderForm">
+        
+        <div class="form-group">
+          <label for="orderType">نوع الطلب:</label>
+          <select id="orderType" onchange="toggleOrderType()">
+            <option value="single">شراء كيس قهوة مفرد</option>
+            <option value="subscription">⭐ اشتراك صندوق القهوة الشهري (كل أسبوعين)</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="productGroup">
+          <label for="productSelect">اختر المحصول:</label>
+          <select id="productSelect">
+            <option value="" disabled selected>اختر الحبوب المطلوبة...</option>
+            <option value="محصول إثيوبيا - يرجاشيف (55 ر.س)">محصول إثيوبيا - يرجاشيف (55 ر.س)</option>
+            <option value="محصول كولومبيا - سان أغوستين (60 ر.س)">محصول كولومبيا - سان أغوستين (60 ر.س)</option>
+            <option value="محصول البرازيل - سيرادو (50 ر.س)">محصول البرازيل - سيرادو (50 ر.س)</option>
+            <option value="خلطة الإسبريسو الخاصة (65 ر.س)">خلطة الإسبريسو الخاصة (65 ر.س)</option>
+          </select>
+        </div>
+
+        <!-- خيار الاشتراك (يظهر عند اختيار الاشتراك) -->
+        <div class="form-group hidden" id="subGroup">
+          <label for="subPlan">اختر باقة الاشتراك:</label>
+          <select id="subPlan">
+            <option value="اشتراك شهري - باقة محصولين (توصيل كل أسبوعين) - 110 ر.س">باقة محصولين شهرياً (110 ر.س)</option>
+            <option value="اشتراك شهري - باقة 4 محاصيل فاخرة (توصيل كل أسبوعين) - 210 ر.س">باقة 4 محاصيل فاخرة (210 ر.س)</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="quantityGroup">
+          <label for="quantity">الكمية (عدد العبوات):</label>
+          <input type="number" id="quantity" min="1" value="1">
+        </div>
+
+        <!-- خيار الهدية -->
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" id="isGift" onclick="toggleGiftFields()"> هل الطلب هدية لشخص عزيز؟ 🎁
+          </label>
+        </div>
+
+        <!-- حقول الهدية (مخفية افتراضياً) -->
+        <div id="giftFields" class="hidden gift-box">
+          <div class="form-group">
+            <label for="giftMessage">النص المكتوب على الكرت المرفق:</label>
+            <textarea id="giftMessage" rows="2" placeholder="مثال: كل عام وأنت بخير يا صديقي، من..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="recipientAddress">عنوان الشخص المستلم للهدية (المدينة والحي):</label>
+            <input type="text" id="recipientAddress" placeholder="عنوان المستلم كاملاً">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="clientName">اسمك الكريم:</label>
+          <input type="text" id="clientName" placeholder="أدخل اسمك الكامل" required>
+        </div>
+
+        <div class="form-group">
+          <label for="clientPhone">رقم الجوال:</label>
+          <input type="tel" id="clientPhone" placeholder="05XXXXXXXX" required>
+        </div>
+
+        <div class="form-group" id="addressGroup">
+          <label for="clientAddress">عنوان التوصيل (المدينة والحي):</label>
+          <input type="text" id="clientAddress" placeholder="مثال: الرياض - حي الصحافة">
+        </div>
+
+        <div class="form-group">
+          <label for="notes">ملاحظات إضافية (اختياري):</label>
+          <textarea id="notes" rows="2" placeholder="أي تفاصيل أخرى تود إضافتها..."></textarea>
+        </div>
+
+        <button type="submit" class="whatsapp-btn">
+          إرسال الطلب عبر الواتساب 📲
+        </button>
+
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>جميع الحقوق محفوظة © 2026 محمصة القهوة المختصة</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
