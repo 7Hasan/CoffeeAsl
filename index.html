@@ -3,149 +3,257 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ROASTERY | تجربة القهوة الفاخرة</title>
+  <title>ROASTERY | محمصة القهوة المختصة الفاخرة</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- خلفية ديناميكية متحركة -->
-  <div class="bg-glow"></div>
+  <!-- خلفية متوهجة تفاعلية -->
+  <div class="ambient-glow"></div>
 
+  <!-- شريط التنقل العلوي وزر السلة -->
   <nav class="navbar">
     <div class="logo">ROASTERY<span>.</span></div>
-    <div class="nav-status"><span class="pulse"></span> المحامص الفاخرة - جاهزة للشحن</div>
+    <div class="nav-actions">
+      <div class="status-badge"><span class="pulse"></span> محاصيل طازجة للشحن</div>
+      <button class="cart-trigger-btn" onclick="toggleCartDrawer()">
+        🛒 السلة <span id="cartBadge" class="cart-badge">0</span>
+      </button>
+    </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- الهيدر السينمائي -->
   <header class="hero">
     <span class="tagline">SPECIALTY COFFEE BEANS</span>
-    <h1>أصالة المذاق في كل حبة قهوة</h1>
-    <p>محاصيل مختارة بفيض من الشغف ومعالجة بأعلى معايير الجودة العالمية.</p>
+    <h1>رحلة تذوق استثنائية تبدأ من الحبة</h1>
+    <p>ننتقي أرقى المحاصيل العالمية ونحمصها بشغف لتستمتع بكوب قهوة لا يُنسى.</p>
   </header>
 
   <main class="container">
 
-    <!-- قسم اختيار المحصول التفاعلي (Interactive Product Cards) -->
+    <!-- 🎯 1. مستكشف القهوة الذكي (Interactive Flavor Quiz) -->
+    <section class="quiz-section">
+      <div class="section-header">
+        <h2>🎯 مستكشف القهوة الذكي</h2>
+        <p>لا تعرف أي محصول تختار؟ أجب عن هذه الأسئلة الثلاثة لنرشح لك الكوب المثالي فوراً:</p>
+      </div>
+
+      <div class="quiz-card" id="quizContainer">
+        <!-- الخطوة 1 -->
+        <div class="quiz-step active" id="step1">
+          <span class="step-indicator">السؤال 1 من 3</span>
+          <h3>كيف تحب قهوتك الغالبة؟</h3>
+          <div class="quiz-options">
+            <button onclick="nextQuizStep(1, 'فلتر / V60')">فلتر / V60 ☕</button>
+            <button onclick="nextQuizStep(1, 'إسبريسو بالحليب')">إسبريسو بالحليب 🥛</button>
+            <button onclick="nextQuizStep(1, 'أسود ثقيل')">أسود ثقيل ✨</button>
+          </div>
+        </div>
+
+        <!-- الخطوة 2 -->
+        <div class="quiz-step" id="step2">
+          <span class="step-indicator">السؤال 2 من 3</span>
+          <h3>ما هي النكهات المفضلة لديك؟</h3>
+          <div class="quiz-options">
+            <button onclick="nextQuizStep(2, 'نكهات فواكهية وحمضية منعشة')">فواكهية وحمضية 🍑</button>
+            <button onclick="nextQuizStep(2, 'شوكولاتة ومكسرات بقوام غني')">شوكولاتة ومكسرات 🍫</button>
+          </div>
+        </div>
+
+        <!-- الخطوة 3 -->
+        <div class="quiz-step" id="step3">
+          <span class="step-indicator">السؤال 3 من 3</span>
+          <h3>ما هو القوام الذي تفضله؟</h3>
+          <div class="quiz-options">
+            <button onclick="finishQuiz('خفيف منعش')">خفيف منعش 🍃</button>
+            <button onclick="finishQuiz('ثقيل وغني')">ثقيل وغني ⚖️</button>
+          </div>
+        </div>
+
+        <!-- نتيجة الكويز -->
+        <div class="quiz-step" id="quizResultStep">
+          <div class="result-box">
+            <span class="badge gold">ترشيح خبير القهوة لك</span>
+            <h3 id="recommendedTitle">محصول إثيوبيا - يرجاشيف</h3>
+            <p id="recommendedDesc">بناءً على إجاباتك، هذا المحصول سيمنحك التجربة المثالية التي تبحث عنها.</p>
+            <button class="add-btn" id="quizAddBtn" onclick="addRecommendedToCart()">أضف هذا المحصول للسلة فوراً 🫘</button>
+            <button class="reset-quiz-btn" onclick="resetQuiz()">إعادة الاختبار ⟳</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم المنتجات الفاخرة -->
     <section class="products-section">
       <div class="section-header">
-        <h2>المحاصيل المتاحة</h2>
-        <p>انقر على المحصول لتحديده فوراً في نموذج الطلب</p>
+        <h2>المحاصيل المتوفرة (حبوب كاملة)</h2>
+        <p>انقر على "أضف للسلة" لتجميع طلبك بكل سلاسة</p>
       </div>
 
       <div class="products-grid">
         
-        <div class="product-card active" onclick="selectProduct(this, 'محصول إثيوبيا - يرجاشيف', '55 ر.س')">
-          <div class="card-glow"></div>
-          <span class="badge">الأعلى تقييماً</span>
-          <div class="product-icon">☕</div>
+        <div class="product-card">
+          <span class="badge">الأكثر طلباً</span>
+          <div class="product-icon">🫘</div>
           <h3>إثيوبيا - يرجاشيف</h3>
-          <p class="tasting-notes">أزهار الياسمين • الخوخ • حلاوة متوازنة</p>
+          <p class="tasting-notes">أزهار الياسمين • الخوخ • حمضية متوازنة</p>
           <div class="card-footer">
-            <span class="weight">250g - حبوب كاملة</span>
             <span class="price">55 ر.س</span>
+            <button class="add-btn" onclick="addToCart('إثيوبيا - يرجاشيف', 55)">أضف للسلة</button>
           </div>
         </div>
 
-        <div class="product-card" onclick="selectProduct(this, 'محصول كولومبيا - سان أغوستين', '60 ر.س')">
-          <div class="card-glow"></div>
-          <div class="product-icon">☕</div>
+        <div class="product-card">
+          <div class="product-icon">🫘</div>
           <h3>كولومبيا - سان أغوستين</h3>
-          <p class="tasting-notes">شوكولاتة داكنة • مكسرات حمصية • قوام مخملي</p>
+          <p class="tasting-notes">شوكولاتة داكنة • مكسرات • قوام مخملي</p>
           <div class="card-footer">
-            <span class="weight">250g - حبوب كاملة</span>
             <span class="price">60 ر.س</span>
+            <button class="add-btn" onclick="addToCart('كولومبيا - سان أغوستين', 60)">أضف للسلة</button>
           </div>
         </div>
 
-        <div class="product-card" onclick="selectProduct(this, 'محصول البرازيل - سيرادو', '50 ر.س')">
-          <div class="card-glow"></div>
-          <div class="product-icon">☕</div>
+        <div class="product-card">
+          <div class="product-icon">🫘</div>
           <h3>البرازيل - سيرادو</h3>
-          <p class="tasting-notes">بندق حمضي • كاكاو • حموضة منخفضة</p>
+          <p class="tasting-notes">بندق محمص • كاكاو غني • حموضة منخفضة</p>
           <div class="card-footer">
-            <span class="weight">250g - حبوب كاملة</span>
             <span class="price">50 ر.س</span>
+            <button class="add-btn" onclick="addToCart('البرازيل - سيرادو', 50)">أضف للسلة</button>
           </div>
         </div>
 
-        <div class="product-card" onclick="selectProduct(this, 'خلطة الإسبريسو الخاصة', '65 ر.س')">
-          <div class="card-glow"></div>
-          <span class="badge gold">خلطة المحمصة</span>
+        <div class="product-card">
+          <span class="badge gold">خلطة خاصة</span>
           <div class="product-icon">✨</div>
           <h3>خلطة الإسبريسو الفاخرة</h3>
-          <p class="tasting-notes">مزيج متوازن خصيصاً لمشروبات الإسبريسو والحليب</p>
+          <p class="tasting-notes">متوازنة خصيصاً لمشروبات الحليب والإسبريسو</p>
           <div class="card-footer">
-            <span class="weight">250g - حبوب كاملة</span>
             <span class="price">65 ر.س</span>
+            <button class="add-btn" onclick="addToCart('خلطة الإسبريسو الفاخرة', 65)">أضف للسلة</button>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- Glassmorphic Order Form -->
+    <!-- 🎁 2. اشتراك صندوق القهوة الشهري (Subscription Box) -->
+    <section class="subscription-section">
+      <div class="subscription-card">
+        <div class="sub-badge">خدمة النخبة</div>
+        <h2>📦 اشتراك عشاق القهوة الشهري</h2>
+        <p>لا تقلق بشأن نفاد القهوة بعد اليوم! نختار لك كل أسبوعين أكياس قهوة طازجة ومميزة وتصلك حتى باب منزلك تلقائياً.</p>
+        
+        <div class="sub-options">
+          <label class="sub-option-box">
+            <input type="radio" name="subPlan" value="باقة 3 أشهر (كيسين كل أسبوعين) - 290 ر.س" checked>
+            <div>
+              <h4>باقة 3 أشهر</h4>
+              <span>كيسين قهوة مميزة كل أسبوعين (إجمالي 6 أكياس) - 290 ر.س</span>
+            </div>
+          </label>
+
+          <label class="sub-option-box">
+            <input type="radio" name="subPlan" value="باقة 6 أشهر (كيسين كل أسبوعين) - 550 ر.س">
+            <div>
+              <h4>باقة 6 أشهر (توفير أكبر)</h4>
+              <span>كيسين قهوة مميزة كل أسبوعين (إجمالي 12 كيس) - 550 ر.س</span>
+            </div>
+          </label>
+        </div>
+
+        <button class="sub-add-btn" onclick="addSubscriptionToCart()">اشترك الآن وأضف الباقة للسلة 🌟</button>
+      </div>
+    </section>
+
+    <!-- قسم آراء وقيّم العملاء -->
+    <section class="testimonials-section">
+      <h2>⭐ ماذا قالوا عن محاصيلنا؟</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p>"أجود محصول إثيوبي جربته للـ V60، النكهات واضحة جداً وطازجة."</p>
+          <span>- خالد العمري (الرياض)</span>
+        </div>
+        <div class="testimonial-card">
+          <p>"خلطة الإسبريسو مع الحليب تعطي طعم كافيهات فخم في البيت!"</p>
+          <span>- سارة الشمري (جدة)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- نموذج إتمام الطلب والهدية المطور -->
     <section class="checkout-card">
       <div class="form-header">
-        <h2>تأكيد الطلب السريع</h2>
-        <span id="selectedProductBadge" class="selected-product-badge">المحدد: إثيوبيا - يرجاشيف (55 ر.س)</span>
+        <h2>🛍️ بيانات التوصيل والإرسال</h2>
+        <p>أدخل تفاصيلك لتتمكن من إرسال الطلب المنسق فوراً عبر الواتساب</p>
       </div>
 
       <form id="orderForm">
         
         <div class="form-grid">
-          
           <div class="input-box">
-            <label>الكمية (عدد العبوات)</label>
-            <div class="quantity-control">
-              <button type="button" onclick="changeQty(-1)">-</button>
-              <input type="number" id="quantity" value="1" min="1" readonly>
-              <button type="button" onclick="changeQty(1)">+</button>
-            </div>
+            <label>اسمك الكريم (المُهدي / المشترك / المشتري)</label>
+            <input type="text" id="clientName" placeholder="محمد أحمد" required>
           </div>
 
           <div class="input-box">
-            <label>الاسم الكامل</label>
-            <input type="text" id="clientName" placeholder="محمد عبد الله" required>
-          </div>
-
-          <div class="input-box">
-            <label>رقم الجوال</label>
+            <label>رقم جوالك للتواصل</label>
             <input type="tel" id="clientPhone" placeholder="05XXXXXXXX" required>
           </div>
-
-          <div class="input-box">
-            <label>المدينة والحي</label>
-            <input type="text" id="clientAddress" placeholder="الرياض - حي الملقا" required>
-          </div>
-
         </div>
 
-        <!-- خيار الإهداء الفاخر -->
+        <!-- خيار الإهداء المفصل بدقة -->
         <div class="gift-toggle-wrapper">
           <label class="switch-container">
             <input type="checkbox" id="isGift" onchange="toggleGiftMode()">
             <span class="slider"></span>
           </label>
-          <span class="gift-label">🎁 تقديم الطلب كهدية مغلفة لشخص آخر</span>
+          <span class="gift-label">🎁 تقديم الطلب كهدية لشخص عزيز (تغليف فاخر مع كرت اهداء)</span>
         </div>
 
         <div id="giftSection" class="gift-expandable">
-          <div class="input-box">
-            <label>رسالة الإهداء (تطبع على كارت إهداء خاص)</label>
-            <textarea id="giftMessage" rows="2" placeholder="أكتب رسالتك الخاصة هنا..."></textarea>
+          <div class="gift-box-inner">
+            <h3>تفاصيل المُهدي إليه (المستلم):</h3>
+            
+            <div class="form-grid">
+              <div class="input-box">
+                <label>اسم المُهدى إليه (المستلم)</label>
+                <input type="text" id="recipientName" placeholder="اسم الشخص المستلم">
+              </div>
+              <div class="input-box">
+                <label>رقم جوال المُهدى إليه</label>
+                <input type="tel" id="recipientPhone" placeholder="رقم جوال المستلم للتنسيق">
+              </div>
+            </div>
+
+            <div class="input-box full-width" style="margin-top: 1rem;">
+              <label>عنوان المُهدى إليه (المدينة والحي بالتفصيل)</label>
+              <input type="text" id="recipientAddress" placeholder="مثال: الرياض - حي النرجس، شارع...">
+            </div>
+
+            <div class="input-box full-width" style="margin-top: 1rem;">
+              <label>النص المكتوب على كرت الهدية المرفق</label>
+              <textarea id="giftMessage" rows="2" placeholder="كل عام وأنت بخير يا صديقي..."></textarea>
+            </div>
           </div>
         </div>
 
-        <div class="input-box full-width">
-          <label>ملاحظات خاصة للطلب (اختياري)</label>
-          <input type="text" id="notes" placeholder="أي تفاصيل خاصة بتوصيل الطلب...">
+        <!-- العنوان العادي -->
+        <div class="input-box full-width" id="normalAddressBox">
+          <label>عنوان التوصيل الخاص بك (المدينة والحي)</label>
+          <input type="text" id="clientAddress" placeholder="الرياض - حي الملقا">
+        </div>
+
+        <div class="input-box full-width" style="margin-top: 1.5rem;">
+          <label>ملاحظات إضافية (اختياري)</label>
+          <input type="text" id="notes" placeholder="أي تفاصيل خاصة...">
         </div>
 
         <button type="submit" class="submit-btn">
-          <span>إرسال الطلب فوراً عبر الواتساب</span>
+          <span>إرسال الطلب عبر الواتساب</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
 
@@ -153,6 +261,23 @@
     </section>
 
   </main>
+
+  <!-- نافذة السلة الجانبية -->
+  <div id="cartDrawer" class="cart-drawer">
+    <div class="drawer-header">
+      <h3>🛒 سلة المحاصيل المختارة</h3>
+      <button class="close-drawer" onclick="toggleCartDrawer()">✕</button>
+    </div>
+    <div id="cartItemsList" class="drawer-body"></div>
+    <div class="drawer-footer">
+      <div class="total-row">
+        <span>المجموع الكلي:</span>
+        <span id="cartTotalPrice">0 ر.س</span>
+      </div>
+      <button class="checkout-drawer-btn" onclick="scrollToCheckout()">الانتقال لتأكيد الطلب ➔</button>
+    </div>
+  </div>
+  <div id="drawerOverlay" class="drawer-overlay" onclick="toggleCartDrawer()"></div>
 
   <script src="script.js"></script>
 </body>
