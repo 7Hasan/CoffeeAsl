@@ -1,284 +1,153 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ROASTERY | محمصة القهوة المختصة الفاخرة</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffeeAsl - عالم القهوة الفاخرة</title>
+    <!-- استدعاء خط عربي أنيق وملف الـ CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- خلفية متوهجة تفاعلية -->
-  <div class="ambient-glow"></div>
+    <!-- شريط التنقل العلوي (Navbar) -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">CoffeeAsl ☕</a>
+            <nav class="nav-links">
+                <a href="#hero">الرئيسية</a>
+                <a href="#services">خدماتنا</a>
+                <a href="#explorer">المستكشف الذكي</a>
+                <a href="#order">الطلبات</a>
+            </nav>
+            <!-- زر تبديل الوضع الليلي -->
+            <button class="theme-toggle-btn" id="themeToggle" title="تغيير المظهر">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </header>
 
-  <!-- شريط التنقل العلوي وزر السلة -->
-  <nav class="navbar">
-    <div class="logo">ROASTERY<span>.</span></div>
-    <div class="nav-actions">
-      <div class="status-badge"><span class="pulse"></span> محاصيل طازجة للشحن</div>
-      <button class="cart-trigger-btn" onclick="toggleCartDrawer()">
-        🛒 السلة <span id="cartBadge" class="cart-badge">0</span>
-      </button>
+    <!-- قسم الهيرو (Hero Section) -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <span class="badge">أصالة القهوة اليمنية والعالمية</span>
+            <h1 class="title">اكتشف المعنى الحقيقي للقهوة الفاخرة</h1>
+            <p class="description">نقدم لك أجود المحاصيل وأفضل طرق التحضير لتستمتع بكل رشفة بحواس متجددة.</p>
+            <div class="actions">
+                <a href="#explorer" class="btn primary">جرب المستكشف الذكي</a>
+                <a href="#order" class="btn secondary">اطلب الآن</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم خدمات موقعك الأصلية (محافظ عليها بالكامل) -->
+    <section class="services-section" id="services">
+        <div class="section-container">
+            <h2>خدماتنا المميزة</h2>
+            <p class="section-sub">كل ما تحتاجه لعالم القهوة المختصة في مكان واحد</p>
+            <div class="services-grid">
+                <div class="service-box">
+                    <div class="service-icon">🌱</div>
+                    <h3>محاصيل طازجة</h3>
+                    <p>محاصيل مختارة بعناية من أفضل المزارع العالمية والمحلية.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">🔥</div>
+                    <h3>تحميص احترافي</h3>
+                    <p>درجات تحميص مدروسة بعناية لتبرز أروع الإيحاءات النكهة.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">📦</div>
+                    <h3>توصيل سريع</h3>
+                    <p>نصلك أينما كنت لضمان وصول الحبوب بحالتها الطازجة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم مستكشف القهوة الذكي والتفاعل الحركي (Three.js + GSAP) -->
+    <section class="coffee-explorer-section" id="explorer">
+        <div class="explorer-container">
+            <div class="explorer-header">
+                <span class="sub-badge">تجربة تفاعلية ذكية</span>
+                <h2>مستكشف القهوة الفاخرة</h2>
+                <p>اختر تفضيلاتك وسيقوم النظام الذكي بترشيح الكوب المثالي خصيصاً لك أو لصديقك.</p>
+            </div>
+
+            <!-- حقل إدخال اسم الصديق (مع معالجة مطورة للنصوص العربية لمنع التلخبط) -->
+            <div class="name-input-wrapper">
+                <label for="friendName">لمن هذه التذوقة؟ (اسمك أو اسم صديقك):</label>
+                <input type="text" id="friendName" placeholder="مثال: عبدالله اليماني" autocomplete="off">
+            </div>
+
+            <!-- بطاقات الخيارات -->
+            <div class="choices-grid">
+                <div class="choice-card" data-pref="fruity">
+                    <div class="card-icon">🍒</div>
+                    <h3>إيحاءات فاكهية</h3>
+                    <p>حموضة عالية، إيحاءات التوت والحمضيات</p>
+                </div>
+                <div class="choice-card" data-pref="chocolate">
+                    <div class="card-icon">🍫</div>
+                    <h3>شوكولاتة ومكسرات</h3>
+                    <p>قوام ممتلئ، حلاوة عالية وإيحاء الكاكاو</p>
+                </div>
+                <div class="choice-card" data-pref="balanced">
+                    <div class="card-icon">⚖️</div>
+                    <h3>متوازن ومقترن بالحليب</h3>
+                    <p>مثالي للإسبريسو ومشروبات الحليب</p>
+                </div>
+            </div>
+
+            <!-- بطاقة النتيجة الذكية (تظهر عند الاختيار) -->
+            <div class="result-card-modal" id="resultModal" style="display: none;">
+                <div class="modal-content">
+                    <button class="close-modal" id="closeModal">&times;</button>
+                    <div class="recipient-name-tag" id="recipientDisplay"></div>
+                    <h3 id="resultTitle">نتيجة الترشيح</h3>
+                    <p id="resultDesc">هنا تظهر تفاصيل القهوة المناسبة بدقة...</p>
+                    <div class="result-specs">
+                        <span id="specRoast">التحميص: متوسط</span>
+                        <span id="specProcess">المعالجة: مجففة / مغسولة</span>
+                    </div>
+                    <button class="add-to-cart-action" id="addToCartBtn">إضافة للسلة الذكية</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- كانفاس Three.js للخلفية ثلاثية الأبعاد -->
+        <canvas id="bgCanvas"></canvas>
+    </section>
+
+    <!-- قسم الطلبات (#order) الأساسي في موقعك -->
+    <section class="order-section" id="order">
+        <div class="section-container">
+            <h2>قسم الطلبات المباشرة</h2>
+            <p class="section-sub">اختر منتجك وأتمم طلبك بكل سهولة</p>
+            <div class="order-box-container">
+                <p>جميع محاصيلنا متوفرة وجاهزة للطلب الفوري. تصفح القائمة أعلاه واستمتع بتجربة فريدة.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- السلة الديناميكية (تختفي تماماً إذا لم يكن هناك طلبات) -->
+    <div class="dynamic-cart-bar" id="dynamicCart" style="display: none;">
+        <div class="cart-info">
+            <span>🛒 السلة الذكية: <strong id="cartItemName">لا شيء</strong></span>
+            <span class="cart-price" id="cartItemPrice">0 ر.س</span>
+        </div>
+        <button class="checkout-btn">إتمام الطلب</button>
     </div>
-  </nav>
 
-  <!-- الهيدر السينمائي -->
-  <header class="hero">
-    <span class="tagline">SPECIALTY COFFEE BEANS</span>
-    <h1>رحلة تذوق استثنائية تبدأ من الحبة</h1>
-    <p>ننتقي أرقى المحاصيل العالمية ونحمصها بشغف لتستمتع بكوب قهوة لا يُنسى.</p>
-  </header>
+    <!-- الفوتر -->
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 CoffeeAsl</p>
+    </footer>
 
-  <main class="container">
-
-    <!-- 🎯 1. مستكشف القهوة الذكي (Interactive Flavor Quiz) -->
-    <section class="quiz-section">
-      <div class="section-header">
-        <h2>🎯 مستكشف القهوة الذكي</h2>
-        <p>لا تعرف أي محصول تختار؟ أجب عن هذه الأسئلة الثلاثة لنرشح لك الكوب المثالي فوراً:</p>
-      </div>
-
-      <div class="quiz-card" id="quizContainer">
-        <!-- الخطوة 1 -->
-        <div class="quiz-step active" id="step1">
-          <span class="step-indicator">السؤال 1 من 3</span>
-          <h3>كيف تحب قهوتك الغالبة؟</h3>
-          <div class="quiz-options">
-            <button onclick="nextQuizStep(1, 'فلتر / V60')">فلتر / V60 ☕</button>
-            <button onclick="nextQuizStep(1, 'إسبريسو بالحليب')">إسبريسو بالحليب 🥛</button>
-            <button onclick="nextQuizStep(1, 'أسود ثقيل')">أسود ثقيل ✨</button>
-          </div>
-        </div>
-
-        <!-- الخطوة 2 -->
-        <div class="quiz-step" id="step2">
-          <span class="step-indicator">السؤال 2 من 3</span>
-          <h3>ما هي النكهات المفضلة لديك؟</h3>
-          <div class="quiz-options">
-            <button onclick="nextQuizStep(2, 'نكهات فواكهية وحمضية منعشة')">فواكهية وحمضية 🍑</button>
-            <button onclick="nextQuizStep(2, 'شوكولاتة ومكسرات بقوام غني')">شوكولاتة ومكسرات 🍫</button>
-          </div>
-        </div>
-
-        <!-- الخطوة 3 -->
-        <div class="quiz-step" id="step3">
-          <span class="step-indicator">السؤال 3 من 3</span>
-          <h3>ما هو القوام الذي تفضله؟</h3>
-          <div class="quiz-options">
-            <button onclick="finishQuiz('خفيف منعش')">خفيف منعش 🍃</button>
-            <button onclick="finishQuiz('ثقيل وغني')">ثقيل وغني ⚖️</button>
-          </div>
-        </div>
-
-        <!-- نتيجة الكويز -->
-        <div class="quiz-step" id="quizResultStep">
-          <div class="result-box">
-            <span class="badge gold">ترشيح خبير القهوة لك</span>
-            <h3 id="recommendedTitle">محصول إثيوبيا - يرجاشيف</h3>
-            <p id="recommendedDesc">بناءً على إجاباتك، هذا المحصول سيمنحك التجربة المثالية التي تبحث عنها.</p>
-            <button class="add-btn" id="quizAddBtn" onclick="addRecommendedToCart()">أضف هذا المحصول للسلة فوراً 🫘</button>
-            <button class="reset-quiz-btn" onclick="resetQuiz()">إعادة الاختبار ⟳</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- قسم المنتجات الفاخرة -->
-    <section class="products-section">
-      <div class="section-header">
-        <h2>المحاصيل المتوفرة (حبوب كاملة)</h2>
-        <p>انقر على "أضف للسلة" لتجميع طلبك بكل سلاسة</p>
-      </div>
-
-      <div class="products-grid">
-        
-        <div class="product-card">
-          <span class="badge">الأكثر طلباً</span>
-          <div class="product-icon">🫘</div>
-          <h3>إثيوبيا - يرجاشيف</h3>
-          <p class="tasting-notes">أزهار الياسمين • الخوخ • حمضية متوازنة</p>
-          <div class="card-footer">
-            <span class="price">55 ر.س</span>
-            <button class="add-btn" onclick="addToCart('إثيوبيا - يرجاشيف', 55)">أضف للسلة</button>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-icon">🫘</div>
-          <h3>كولومبيا - سان أغوستين</h3>
-          <p class="tasting-notes">شوكولاتة داكنة • مكسرات • قوام مخملي</p>
-          <div class="card-footer">
-            <span class="price">60 ر.س</span>
-            <button class="add-btn" onclick="addToCart('كولومبيا - سان أغوستين', 60)">أضف للسلة</button>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-icon">🫘</div>
-          <h3>البرازيل - سيرادو</h3>
-          <p class="tasting-notes">بندق محمص • كاكاو غني • حموضة منخفضة</p>
-          <div class="card-footer">
-            <span class="price">50 ر.س</span>
-            <button class="add-btn" onclick="addToCart('البرازيل - سيرادو', 50)">أضف للسلة</button>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <span class="badge gold">خلطة خاصة</span>
-          <div class="product-icon">✨</div>
-          <h3>خلطة الإسبريسو الفاخرة</h3>
-          <p class="tasting-notes">متوازنة خصيصاً لمشروبات الحليب والإسبريسو</p>
-          <div class="card-footer">
-            <span class="price">65 ر.س</span>
-            <button class="add-btn" onclick="addToCart('خلطة الإسبريسو الفاخرة', 65)">أضف للسلة</button>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 🎁 2. اشتراك صندوق القهوة الشهري (Subscription Box) -->
-    <section class="subscription-section">
-      <div class="subscription-card">
-        <div class="sub-badge">خدمة النخبة</div>
-        <h2>📦 اشتراك عشاق القهوة الشهري</h2>
-        <p>لا تقلق بشأن نفاد القهوة بعد اليوم! نختار لك كل أسبوعين أكياس قهوة طازجة ومميزة وتصلك حتى باب منزلك تلقائياً.</p>
-        
-        <div class="sub-options">
-          <label class="sub-option-box">
-            <input type="radio" name="subPlan" value="باقة 3 أشهر (كيسين كل أسبوعين) - 290 ر.س" checked>
-            <div>
-              <h4>باقة 3 أشهر</h4>
-              <span>كيسين قهوة مميزة كل أسبوعين (إجمالي 6 أكياس) - 290 ر.س</span>
-            </div>
-          </label>
-
-          <label class="sub-option-box">
-            <input type="radio" name="subPlan" value="باقة 6 أشهر (كيسين كل أسبوعين) - 550 ر.س">
-            <div>
-              <h4>باقة 6 أشهر (توفير أكبر)</h4>
-              <span>كيسين قهوة مميزة كل أسبوعين (إجمالي 12 كيس) - 550 ر.س</span>
-            </div>
-          </label>
-        </div>
-
-        <button class="sub-add-btn" onclick="addSubscriptionToCart()">اشترك الآن وأضف الباقة للسلة 🌟</button>
-      </div>
-    </section>
-
-    <!-- قسم آراء وقيّم العملاء -->
-    <section class="testimonials-section">
-      <h2>⭐ ماذا قالوا عن محاصيلنا؟</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p>"أجود محصول إثيوبي جربته للـ V60، النكهات واضحة جداً وطازجة."</p>
-          <span>- خالد العمري (الرياض)</span>
-        </div>
-        <div class="testimonial-card">
-          <p>"خلطة الإسبريسو مع الحليب تعطي طعم كافيهات فخم في البيت!"</p>
-          <span>- سارة الشمري (جدة)</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- نموذج إتمام الطلب والهدية المطور -->
-    <section class="checkout-card">
-      <div class="form-header">
-        <h2>🛍️ بيانات التوصيل والإرسال</h2>
-        <p>أدخل تفاصيلك لتتمكن من إرسال الطلب المنسق فوراً عبر الواتساب</p>
-      </div>
-
-      <form id="orderForm">
-        
-        <div class="form-grid">
-          <div class="input-box">
-            <label>اسمك الكريم (المُهدي / المشترك / المشتري)</label>
-            <input type="text" id="clientName" placeholder="محمد أحمد" required>
-          </div>
-
-          <div class="input-box">
-            <label>رقم جوالك للتواصل</label>
-            <input type="tel" id="clientPhone" placeholder="05XXXXXXXX" required>
-          </div>
-        </div>
-
-        <!-- خيار الإهداء المفصل بدقة -->
-        <div class="gift-toggle-wrapper">
-          <label class="switch-container">
-            <input type="checkbox" id="isGift" onchange="toggleGiftMode()">
-            <span class="slider"></span>
-          </label>
-          <span class="gift-label">🎁 تقديم الطلب كهدية لشخص عزيز (تغليف فاخر مع كرت اهداء)</span>
-        </div>
-
-        <div id="giftSection" class="gift-expandable">
-          <div class="gift-box-inner">
-            <h3>تفاصيل المُهدي إليه (المستلم):</h3>
-            
-            <div class="form-grid">
-              <div class="input-box">
-                <label>اسم المُهدى إليه (المستلم)</label>
-                <input type="text" id="recipientName" placeholder="اسم الشخص المستلم">
-              </div>
-              <div class="input-box">
-                <label>رقم جوال المُهدى إليه</label>
-                <input type="tel" id="recipientPhone" placeholder="رقم جوال المستلم للتنسيق">
-              </div>
-            </div>
-
-            <div class="input-box full-width" style="margin-top: 1rem;">
-              <label>عنوان المُهدى إليه (المدينة والحي بالتفصيل)</label>
-              <input type="text" id="recipientAddress" placeholder="مثال: الرياض - حي النرجس، شارع...">
-            </div>
-
-            <div class="input-box full-width" style="margin-top: 1rem;">
-              <label>النص المكتوب على كرت الهدية المرفق</label>
-              <textarea id="giftMessage" rows="2" placeholder="كل عام وأنت بخير يا صديقي..."></textarea>
-            </div>
-          </div>
-        </div>
-
-        <!-- العنوان العادي -->
-        <div class="input-box full-width" id="normalAddressBox">
-          <label>عنوان التوصيل الخاص بك (المدينة والحي)</label>
-          <input type="text" id="clientAddress" placeholder="الرياض - حي الملقا">
-        </div>
-
-        <div class="input-box full-width" style="margin-top: 1.5rem;">
-          <label>ملاحظات إضافية (اختياري)</label>
-          <input type="text" id="notes" placeholder="أي تفاصيل خاصة...">
-        </div>
-
-        <button type="submit" class="submit-btn">
-          <span>إرسال الطلب عبر الواتساب</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-
-      </form>
-    </section>
-
-  </main>
-
-  <!-- نافذة السلة الجانبية -->
-  <div id="cartDrawer" class="cart-drawer">
-    <div class="drawer-header">
-      <h3>🛒 سلة المحاصيل المختارة</h3>
-      <button class="close-drawer" onclick="toggleCartDrawer()">✕</button>
-    </div>
-    <div id="cartItemsList" class="drawer-body"></div>
-    <div class="drawer-footer">
-      <div class="total-row">
-        <span>المجموع الكلي:</span>
-        <span id="cartTotalPrice">0 ر.س</span>
-      </div>
-      <button class="checkout-drawer-btn" onclick="scrollToCheckout()">الانتقال لتأكيد الطلب ➔</button>
-    </div>
-  </div>
-  <div id="drawerOverlay" class="drawer-overlay" onclick="toggleCartDrawer()"></div>
-
-  <script src="script.js"></script>
+    <!-- استدعاء المكتبات عبر CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- استدعاء ملف الجافا سكريبت المنفصل -->
+    <script src="script.js"></script>
 </body>
 </html>
