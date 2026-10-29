@@ -1,106 +1,252 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>روستري | محمصة القهوة المختصة</title>
-  <link rel="stylesheet" href="style.css">
+  <title>ROASTERY | محمصة القهوة المختصة</title>
+  
+  <!-- Tailwind CSS عبر CDN لتصميم فاخر وسريع -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- خطوط تجربة المستخدم الفاخرة (Tajawal & Readex Pro) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- مكتبة Lucide للأيقونات العصرية -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- تخصيص ألوان الهوية البصرية -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#140C0B',     /* أسود دافئ داكن جداً */
+              card: '#1F1412',     /* لون كروت الفخامة */
+              accent: '#C88A58',   /* كراميل فاخر */
+              gold: '#E5C158',     /* ذهبي معتق */
+              cream: '#FAF6F0',    /* خلفية كريمية حريرية */
+              soft: '#8E7A75'      /* رمادي بني ناعم */
+            }
+          },
+          fontFamily: {
+            sans: ['Readex Pro', 'Tajawal', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* تأثيرات وانيميشن مخصص للنعومة */
+    .glass-card {
+      background: rgba(31, 20, 18, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(200, 138, 88, 0.15);
+    }
+    
+    .glass-nav {
+      background: rgba(20, 12, 11, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(200, 138, 88, 0.1);
+    }
+
+    .glow-effect:hover {
+      box-shadow: 0 0 25px rgba(200, 138, 88, 0.25);
+    }
+
+    /* السلاسة عند التنقل */
+    * {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
 </head>
-<body>
+<body class="bg-brand-dark text-brand-cream font-sans antialiased selection:bg-brand-accent selection:text-white pb-20">
 
-  <!-- شريط الإعلانات المتحرك العلوي -->
-  <div class="announcement-bar">
-    ✨ شحن سريع لجميع المدن | حبوب قهوة محمصة حديثاً ☕
-  </div>
+  <!-- شريط ملاحة زجاجي ثابت (Sticky Glass Nav) -->
+  <nav class="sticky top-0 z-50 glass-nav px-6 py-4 flex justify-between items-center max-w-6xl mx-auto">
+    <div class="flex items-center gap-2">
+      <span class="text-2xl">☕</span>
+      <span class="text-xl font-bold tracking-widest text-brand-gold font-mono">ROASTERY</span>
+    </div>
+    <a href="#order" class="bg-brand-accent hover:bg-opacity-90 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg hover:scale-105 active:scale-95">
+      اطلب الآن
+    </a>
+  </nav>
 
-  <!-- الهيدر الرئيسي -->
-  <header class="header">
-    <div class="header-content">
-      <div class="logo">🌿 ROASTERY</div>
-      <h1>نختار أجود حبوب القهوة لنصنع لك كوبك المثالي</h1>
-      <p>محامص محلية، معالجة دقيقة، وإيحاءات لا تنسى.</p>
+  <!-- الهيدر الرئيسي (Hero Section) بانيميشن ترحيبي -->
+  <header class="relative pt-16 pb-20 px-6 text-center max-w-4xl mx-auto overflow-hidden">
+    <div class="inline-flex items-center gap-2 bg-brand-card/80 border border-brand-accent/30 text-brand-gold text-xs px-4 py-1.5 rounded-full mb-6 shadow-inner animate-pulse">
+      <span>✨ محاصيل محمصة حديثاً - حبوب كاملة 100%</span>
+    </div>
+    
+    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-l from-white via-brand-cream to-brand-accent">
+      تجربة تذوق فاخرة في كل رشفة
+    </h1>
+    
+    <p class="text-brand-soft text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-8">
+      نستورد أفخر حبوب القهوة من أعالي جبال إثيوبيا وكولومبيا، ونحمصها بعناية فائقة لنقدم لك إيحاءات نادرة لا تُنسى.
+    </p>
+
+    <!-- إحصائيات سريعة تعزز الثقة -->
+    <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto pt-4 border-t border-brand-card">
+      <div>
+        <div class="text-xl font-bold text-brand-gold">100%</div>
+        <div class="text-[10px] text-brand-soft">مختصة أصيلة</div>
+      </div>
+      <div>
+        <div class="text-xl font-bold text-brand-gold">+24h</div>
+        <div class="text-[10px] text-brand-soft">تحميص طازج</div>
+      </div>
+      <div>
+        <div class="text-xl font-bold text-brand-gold">4.9 ★</div>
+        <div class="text-[10px] text-brand-soft">تقييم عشاق القهوة</div>
+      </div>
     </div>
   </header>
 
-  <main class="container">
+  <main class="max-w-5xl mx-auto px-6 space-y-20">
 
-    <!-- أداة مستكشف القهوة الذكي (تفاعل فوري) -->
-    <section class="interactive-section">
-      <h2>🎯 مستكشف القهوة الذكي</h2>
-      <p class="section-subtitle">لا تعرف أي محصول تختار؟ أجب عن السؤال التالي لنقترح عليك الأنسب:</p>
+    <!-- مستكشف الذوق التفاعلي (Interactive Recommendation) -->
+    <section class="glass-card rounded-3xl p-8 text-center relative overflow-hidden">
+      <div class="absolute -top-12 -left-12 w-32 h-32 bg-brand-accent/10 rounded-full blur-2xl"></div>
       
-      <div class="quiz-box">
-        <label>ما هي طريقتك المفضلة لتحضير القهوة؟</label>
-        <div class="quiz-options">
-          <button type="button" class="quiz-btn" onclick="recommendCoffee('filter')">فلتر / V60 ☕</button>
-          <button type="button" class="quiz-btn" onclick="recommendCoffee('espresso')">إسبريسو / حليب 🥛</button>
-          <button type="button" class="quiz-btn" onclick="recommendCoffee('balanced')">متوازن للجميع ✨</button>
+      <h2 class="text-xl font-bold text-brand-gold mb-2 flex items-center justify-center gap-2">
+        <i data-lucide="sparkles" class="w-5 h-5 text-brand-accent"></i>
+        مستكشف المحصول المثالي
+      </h2>
+      <p class="text-xs text-brand-soft mb-6">اضغط على طريقة تحضيرك المفضلة لنقترح عليك المحصول الأنسب فوزاً:</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-2xl mx-auto">
+        <button onclick="selectQuiz('filter')" class="group p-4 rounded-2xl bg-brand-card hover:bg-brand-accent/20 border border-brand-accent/20 text-right transition flex items-center justify-between">
+          <div>
+            <div class="font-semibold text-sm group-hover:text-brand-gold">قهوة الفلتر (V60)</div>
+            <div class="text-[11px] text-brand-soft">إيحاءات فواكهية وحمضية لطيفة</div>
+          </div>
+          <span class="text-lg">🧪</span>
+        </button>
+
+        <button onclick="selectQuiz('espresso')" class="group p-4 rounded-2xl bg-brand-card hover:bg-brand-accent/20 border border-brand-accent/20 text-right transition flex items-center justify-between">
+          <div>
+            <div class="font-semibold text-sm group-hover:text-brand-gold">الإسبريسو الحليب</div>
+            <div class="text-[11px] text-brand-soft">قوام ثقيل وشوكولاتة مكسرات</div>
+          </div>
+          <span class="text-lg">☕</span>
+        </button>
+
+        <button onclick="selectQuiz('balanced')" class="group p-4 rounded-2xl bg-brand-card hover:bg-brand-accent/20 border border-brand-accent/20 text-right transition flex items-center justify-between">
+          <div>
+            <div class="font-semibold text-sm group-hover:text-brand-gold">متوازن وشامل</div>
+            <div class="text-[11px] text-brand-soft">يناسب جميع أدوات التحضير</div>
+          </div>
+          <span class="text-lg">⚖️</span>
+        </button>
+      </div>
+
+      <div id="quizResult" class="hidden mt-6 p-4 rounded-xl bg-brand-accent/10 border border-brand-accent/30 text-sm font-medium text-brand-gold animate-fade-in"></div>
+    </section>
+
+    <!-- عرض المنتجات ببطاقات حديثة وتأثيرات Hover تحوم بالهواء -->
+    <section>
+      <div class="flex justify-between items-end mb-8">
+        <div>
+          <h2 class="text-2xl font-bold text-brand-cream">المحاصيل المختارة</h2>
+          <p class="text-xs text-brand-soft">عبوات 250 جرام - حبوب كاملة فاخرة</p>
         </div>
-        <div id="quizResult" class="quiz-result"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- محصول 1 -->
+        <div class="glass-card rounded-2xl p-5 hover:-translate-y-2 glow-effect transition duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="h-36 rounded-xl bg-gradient-to-br from-brand-card to-black flex items-center justify-center text-5xl mb-4 group-hover:scale-110 transition">
+              🫘
+            </div>
+            <div class="text-[10px] text-brand-accent font-semibold tracking-wider mb-1">إثيوبيا • مغسولة</div>
+            <h3 class="font-bold text-base text-white mb-1">يرجاشيف الفاخرة</h3>
+            <p class="text-xs text-brand-soft mb-4 leading-relaxed">إيحاءات الخوخ، الزهور البيضاء، وحمضية متناسقة جداً.</p>
+          </div>
+          <div class="flex justify-between items-center pt-3 border-t border-white/5">
+            <span class="font-bold text-brand-gold">55 ر.س</span>
+            <button onclick="quickSelect('محصول إثيوبيا - يرجاشيف (55 ر.س)')" class="text-xs bg-white/10 hover:bg-brand-accent hover:text-white px-3 py-1.5 rounded-lg transition">اختيار</button>
+          </div>
+        </div>
+
+        <!-- محصول 2 -->
+        <div class="glass-card rounded-2xl p-5 hover:-translate-y-2 glow-effect transition duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="h-36 rounded-xl bg-gradient-to-br from-brand-card to-black flex items-center justify-center text-5xl mb-4 group-hover:scale-110 transition">
+              🫘
+            </div>
+            <div class="text-[10px] text-brand-accent font-semibold tracking-wider mb-1">كولومبيا • مجففة</div>
+            <h3 class="font-bold text-base text-white mb-1">سان أغوستين</h3>
+            <p class="text-xs text-brand-soft mb-4 leading-relaxed">إيحاءات الشوكولاتة الداكنة، اللوز المحمص، وقوام ممتلئ.</p>
+          </div>
+          <div class="flex justify-between items-center pt-3 border-t border-white/5">
+            <span class="font-bold text-brand-gold">60 ر.س</span>
+            <button onclick="quickSelect('محصول كولومبيا - سان أغوستين (60 ر.س)')" class="text-xs bg-white/10 hover:bg-brand-accent hover:text-white px-3 py-1.5 rounded-lg transition">اختيار</button>
+          </div>
+        </div>
+
+        <!-- محصول 3 -->
+        <div class="glass-card rounded-2xl p-5 hover:-translate-y-2 glow-effect transition duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="h-36 rounded-xl bg-gradient-to-br from-brand-card to-black flex items-center justify-center text-5xl mb-4 group-hover:scale-110 transition">
+              🫘
+            </div>
+            <div class="text-[10px] text-brand-accent font-semibold tracking-wider mb-1">البرازيل • طبيعية</div>
+            <h3 class="font-bold text-base text-white mb-1">سيرادو كلاسيك</h3>
+            <p class="text-xs text-brand-soft mb-4 leading-relaxed">إيحاءات الكاكاو البرازيلي والحلاوة المرتفعة، ممتازة للإسبريسو.</p>
+          </div>
+          <div class="flex justify-between items-center pt-3 border-t border-white/5">
+            <span class="font-bold text-brand-gold">50 ر.س</span>
+            <button onclick="quickSelect('محصول البرازيل - سيرادو (50 ر.س)')" class="text-xs bg-white/10 hover:bg-brand-accent hover:text-white px-3 py-1.5 rounded-lg transition">اختيار</button>
+          </div>
+        </div>
+
+        <!-- محصول 4 -->
+        <div class="glass-card rounded-2xl p-5 hover:-translate-y-2 glow-effect transition duration-300 flex flex-col justify-between group border-brand-accent/40">
+          <div>
+            <div class="h-36 rounded-xl bg-gradient-to-br from-brand-accent/20 to-black flex items-center justify-center text-5xl mb-4 group-hover:scale-110 transition">
+              ⭐
+            </div>
+            <div class="text-[10px] text-brand-gold font-semibold tracking-wider mb-1">خلطة خاصة • حصرياً</div>
+            <h3 class="font-bold text-base text-white mb-1">مزاج الإسبريسو</h3>
+            <p class="text-xs text-brand-soft mb-4 leading-relaxed">مزيج متوازن بقوام كريمي فاخر يبرز قوة الطعم مع المشروبات الحليبية.</p>
+          </div>
+          <div class="flex justify-between items-center pt-3 border-t border-white/5">
+            <span class="font-bold text-brand-gold">65 ر.س</span>
+            <button onclick="quickSelect('خلطة الإسبريسو الخاصة (65 ر.س)')" class="text-xs bg-brand-accent hover:bg-brand-accent/80 text-white px-3 py-1.5 rounded-lg transition font-medium">اختيار</button>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- قسم عرض المنتجات -->
-    <section class="products-section">
-      <h2>📦 محاصيلنا المتوفرة (حبوب كاملة)</h2>
-      <div class="products-grid">
-        
-        <div class="product-card">
-          <div class="badge">الأكثر طلباً</div>
-          <div class="product-img">🫘</div>
-          <h3>محصول إثيوبيا - يرجاشيف</h3>
-          <p class="description">حبوب كاملة بمعالجة مغسولة. إيحاءات فواكه والأزهار.</p>
-          <span class="weight">250 جرام</span>
-          <span class="price">55 ر.س</span>
-        </div>
-
-        <div class="product-card">
-          <div class="product-img">🫘</div>
-          <h3>محصول كولومبيا - سان أغوستين</h3>
-          <p class="description">حبوب كاملة بمعالجة مجففة. إيحاءات الشوكولاتة والمكسرات.</p>
-          <span class="weight">250 جرام</span>
-          <span class="price">60 ر.س</span>
-        </div>
-
-        <div class="product-card">
-          <div class="product-img">🫘</div>
-          <h3>محصول البرازيل - سيرادو</h3>
-          <p class="description">حبوب كاملة بقوام غني وإيحاءات الكاكاو والبندق.</p>
-          <span class="weight">250 جرام</span>
-          <span class="price">50 ر.س</span>
-        </div>
-
-        <div class="product-card">
-          <div class="product-img">🫘</div>
-          <h3>خلطة الإسبريسو الخاصة</h3>
-          <p class="description">مزيج متوازن خصيصاً لمشروبات الإسبريسو والحليب.</p>
-          <span class="weight">250 جرام</span>
-          <span class="price">65 ر.س</span>
-        </div>
-
+    <!-- نموذج الطلب السلس والمباشر (Interactive Order Form) -->
+    <section id="order" class="glass-card rounded-3xl p-8 md:p-12 max-w-2xl mx-auto shadow-2xl relative">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-white mb-2">إتمام الطلب المباشر</h2>
+        <p class="text-xs text-brand-soft">سيتم إعداد الطلب وتنسيقه لإرساله فوراً عبر واتساب المحمصة</p>
       </div>
-    </section>
 
-    <!-- نموذج الطلب والخدمات المتقدمة -->
-    <section class="order-section">
-      <h2>🛍️ إتمام الطلب السريع</h2>
-      <form id="orderForm">
+      <form id="orderForm" class="space-y-5">
         
-        <div class="form-group">
-          <label for="orderType">نوع الطلب:</label>
-          <select id="orderType" onchange="toggleOrderType()">
-            <option value="single">شراء كيس قهوة مفرد</option>
-            <option value="subscription">⭐ اشتراك صندوق القهوة الشهري (كل أسبوعين)</option>
-          </select>
+        <!-- تبديل بين شراء عادي أو اشتراك شهري -->
+        <div class="grid grid-cols-2 gap-2 p-1 bg-brand-card rounded-xl border border-white/5">
+          <button type="button" id="tabSingle" onclick="switchTab('single')" class="py-2.5 text-xs font-semibold rounded-lg bg-brand-accent text-white transition">شراء عبوة مفردة</button>
+          <button type="button" id="tabSub" onclick="switchTab('sub')" class="py-2.5 text-xs font-semibold rounded-lg text-brand-soft hover:text-white transition">⭐ اشتراك شهري متجدد</button>
         </div>
 
-        <div class="form-group" id="productGroup">
-          <label for="productSelect">اختر المحصول:</label>
-          <select id="productSelect">
-            <option value="" disabled selected>اختر الحبوب المطلوبة...</option>
+        <!-- اختيار المنتج -->
+        <div id="productField">
+          <label class="block text-xs font-semibold text-brand-cream mb-2">اختر المحصول المطلوب:</label>
+          <select id="productSelect" class="w-full bg-brand-card border border-brand-accent/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-accent">
+            <option value="" disabled selected>اضغط لاختيار المحصول...</option>
             <option value="محصول إثيوبيا - يرجاشيف (55 ر.س)">محصول إثيوبيا - يرجاشيف (55 ر.س)</option>
             <option value="محصول كولومبيا - سان أغوستين (60 ر.س)">محصول كولومبيا - سان أغوستين (60 ر.س)</option>
             <option value="محصول البرازيل - سيرادو (50 ر.س)">محصول البرازيل - سيرادو (50 ر.س)</option>
@@ -108,72 +254,33 @@
           </select>
         </div>
 
-        <!-- خيار الاشتراك (يظهر عند اختيار الاشتراك) -->
-        <div class="form-group hidden" id="subGroup">
-          <label for="subPlan">اختر باقة الاشتراك:</label>
-          <select id="subPlan">
-            <option value="اشتراك شهري - باقة محصولين (توصيل كل أسبوعين) - 110 ر.س">باقة محصولين شهرياً (110 ر.س)</option>
-            <option value="اشتراك شهري - باقة 4 محاصيل فاخرة (توصيل كل أسبوعين) - 210 ر.س">باقة 4 محاصيل فاخرة (210 ر.س)</option>
+        <!-- اختيار باقة الاشتراك (مخفي افتراضياً) -->
+        <div id="subField" class="hidden">
+          <label class="block text-xs font-semibold text-brand-gold mb-2">اختر باقة الاشتراك الشهري:</label>
+          <select id="subSelect" class="w-full bg-brand-card border border-brand-accent/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-accent">
+            <option value="باقة محصولين شهرياً (110 ر.س)">باقة محصولين (توصيل كل أسبوعين) - 110 ر.س</option>
+            <option value="باقة 4 محاصيل فاخرة (210 ر.س)">باقة 4 محاصيل (توصيل كل أسبوعين) - 210 ر.س</option>
           </select>
         </div>
 
-        <div class="form-group" id="quantityGroup">
-          <label for="quantity">الكمية (عدد العبوات):</label>
-          <input type="number" id="quantity" min="1" value="1">
+        <div id="quantityField">
+          <label class="block text-xs font-semibold text-brand-cream mb-2">عدد العبوات:</label>
+          <input type="number" id="quantity" min="1" value="1" class="w-full bg-brand-card border border-brand-accent/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-accent">
         </div>
 
-        <!-- خيار الهدية -->
-        <div class="form-group checkbox-group">
-          <label>
-            <input type="checkbox" id="isGift" onclick="toggleGiftFields()"> هل الطلب هدية لشخص عزيز؟ 🎁
+        <!-- خيار تقديم الطلب كهدية -->
+        <div class="pt-2">
+          <label class="inline-flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" id="isGift" onchange="toggleGift()" class="w-4 h-4 accent-brand-accent rounded">
+            <span class="text-xs text-brand-gold font-medium">🎁 أرغب في إرسال هذا الطلب كهدية لشخص آخر</span>
           </label>
         </div>
 
-        <!-- حقول الهدية (مخفية افتراضياً) -->
-        <div id="giftFields" class="hidden gift-box">
-          <div class="form-group">
-            <label for="giftMessage">النص المكتوب على الكرت المرفق:</label>
-            <textarea id="giftMessage" rows="2" placeholder="مثال: كل عام وأنت بخير يا صديقي، من..."></textarea>
+        <!-- حقول الهدية المخفية -->
+        <div id="giftBox" class="hidden p-4 rounded-xl bg-brand-accent/5 border border-brand-accent/20 space-y-3">
+          <div>
+            <label class="block text-[11px] text-brand-soft mb-1">نص الكرت المرفق مع القهوة:</label>
+            <input type="text" id="giftMsg" placeholder="كتبنا لك الرسالة بكل حب..." class="w-full bg-brand-card border border-white/10 rounded-lg px-3 py-2 text-xs text-white">
           </div>
-          <div class="form-group">
-            <label for="recipientAddress">عنوان الشخص المستلم للهدية (المدينة والحي):</label>
-            <input type="text" id="recipientAddress" placeholder="عنوان المستلم كاملاً">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="clientName">اسمك الكريم:</label>
-          <input type="text" id="clientName" placeholder="أدخل اسمك الكامل" required>
-        </div>
-
-        <div class="form-group">
-          <label for="clientPhone">رقم الجوال:</label>
-          <input type="tel" id="clientPhone" placeholder="05XXXXXXXX" required>
-        </div>
-
-        <div class="form-group" id="addressGroup">
-          <label for="clientAddress">عنوان التوصيل (المدينة والحي):</label>
-          <input type="text" id="clientAddress" placeholder="مثال: الرياض - حي الصحافة">
-        </div>
-
-        <div class="form-group">
-          <label for="notes">ملاحظات إضافية (اختياري):</label>
-          <textarea id="notes" rows="2" placeholder="أي تفاصيل أخرى تود إضافتها..."></textarea>
-        </div>
-
-        <button type="submit" class="whatsapp-btn">
-          إرسال الطلب عبر الواتساب 📲
-        </button>
-
-      </form>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <p>جميع الحقوق محفوظة © 2026 محمصة القهوة المختصة</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+          <div>
+            <label class="
